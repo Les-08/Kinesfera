@@ -1,102 +1,97 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plaza de los Juegos</title>
-    <style>
-        /* Estilos CSS para la página */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #555;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        .ruleta {
-            display: flex;
-            justify-content: center;
-            margin-top: 50px;
-        }
-        .opcion {
-            width: 100px;
-            height: 100px;
-            background-color: #ccc;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 10px;
-            cursor: pointer;
-        }
-        .opcion:hover {
-            background-color: #999;
-            color: #fff;
-        }
-    </style>
+	<title>Sorteo</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-    <header>
-        <h1>Plaza de los Juegos</h1>
-    </header>
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#ruleta1">Ruleta 1</a>
-        <a href="#ruleta2">Ruleta 2</a>
-    </nav>
-    <div class="container">
-        <section id="inicio">
-            <!-- Contenido del primer apartado -->
-            <h2>¡Bienvenido!</h2>
-            <p>Este es el área de inicio. Aquí puedes agregar cualquier contenido que desees.</p>
-        </section>
-        <section id="ruleta1">
-            <!-- Contenido del segundo apartado con la ruleta 1 -->
-            <h2>Ruleta 1</h2>
-            <div class="ruleta" id="ruleta1">
-                <div class="opcion" onclick="seleccionarOpcion('Mano derecha')">Mano derecha</div>
-                <div class="opcion" onclick="seleccionarOpcion('Cabeza')">Cabeza</div>
-                <div class="opcion" onclick="seleccionarOpcion('Mano izquierda')">Mano izquierda</div>
-                <div class="opcion" onclick="seleccionarOpcion('Pie derecho')">Pie derecho</div>
-                <div class="opcion" onclick="seleccionarOpcion('Pie izquierdo')">Pie izquierdo</div>
-            </div>
-        </section>
-        <section id="ruleta2">
-            <!-- Contenido del tercer apartado con la ruleta 2 -->
-            <h2>Ruleta 2</h2>
-            <div class="ruleta" id="ruleta2">
-                <div class="opcion" onclick="seleccionarOpcion('Triángulo rojo')">Triángulo rojo</div>
-                <div class="opcion" onclick="seleccionarOpcion('Triángulo amarillo')">Triángulo amarillo</div>
-                <div class="opcion" onclick="seleccionarOpcion('Triángulo naranja')">Triángulo naranja</div>
-                <div class="opcion" onclick="seleccionarOpcion('Triángulo verde')">Triángulo verde</div>
-                <div class="opcion" onclick="seleccionarOpcion('Triángulo azul')">Triángulo azul</div>
-            </div>
-        </section>
-    </div>
-    <script>
-        // Función para manejar la selección de opciones en las ruletas
-        function seleccionarOpcion(opcion) {
-            alert("¡Seleccionaste: " + opcion + "!");
-        }
-    </script>
+	<div class="contenedor">
+		<h1>Concursantes</h1>
+		<div class="concursantes">
+			<canvas id="idcanvas" width="600" height="600"></canvas>
+			<br>
+			<button onclick="sortear()"><span id="idestado">Sortear</span></button>
+			<div class="mark-winner"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const array_concursantes=
+		[
+			
+			'Mano derecha'
+			,'Mano izquierda'
+			,'Cabeza'
+			,'Pie derecho'
+			,'Pie izquierdo'
+		];
+
+		let canvas=document.getElementById("idcanvas");
+		let context=canvas.getContext("2d");
+		let center=canvas.width/2;
+
+		context.beginPath();
+		context.moveTo(center,center);
+		context.arc(center,center,center,0, 2*Math.PI);
+		context.lineTo(center,center);
+		context.fillStyle ='#33333333';
+		context.fill();
+
+		context.beginPath();
+		context.moveTo(center,center);
+		context.arc(center,center,center-10,0, 2*Math.PI);
+		context.lineTo(center,center);
+		context.fillStyle ='black';
+		context.fill();
+
+		for (var i = 0; i < array_concursantes.length; i++) {
+			context.beginPath();
+			context.moveTo(center,center);
+			context.arc(center,center,center-20,i*2*Math.PI/array_concursantes.length, (i+1)*2*Math.PI/array_concursantes.length);
+			context.lineTo(center,center);
+			context.fillStyle =random_color();
+			context.fill();
+
+			context.save();
+			context.translate(center, center);
+			context.rotate(3*2*Math.PI/(5*array_concursantes.length)+i*2*Math.PI/array_concursantes.length);
+			context.translate(-center, -center);
+			context.font = "13px Comic Sans MS";
+			context.textAlign = "right";
+			context.fillStyle = "white";
+			context.fillText(array_concursantes[i], canvas.width-30, center);
+			context.restore();
+		}
+
+		let pos_ini=0;
+		let clic=0;
+		let movement;
+		function sortear(){
+			if (clic==0) {
+				let canvas=document.getElementById("idcanvas");
+				movement=setInterval(function(){
+					pos_ini+=10;
+					canvas.style.transform='rotate('+pos_ini+'deg)';
+				},10);
+				clic=1;
+				document.getElementById("idestado").innerHTML="Detener";
+			}else{
+				clearInterval(movement);
+				clic=0;
+				document.getElementById("idestado").innerHTML="Sortear";
+			}
+		}
+
+		function random_color(){
+			let ar_digit=['2','3','4','5','6','7','8','9'];
+			let color='';
+			let i=0;
+			while(i<6){
+				let pos=Math.round(Math.random()*(ar_digit.length-1));
+				color=color+''+ar_digit[pos];
+				i++;
+			}
+			return '#'+color;
+		}
+	</script>
 </body>
 </html>
