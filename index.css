@@ -48,7 +48,7 @@ button{
 	width: 60px;
 	height: 20px;
 	top: 50%;
-	right: 18%;
+	right: 50%;
 	z-index: 10;
 	box-shadow: 0 0 3px #33333399;
 }
