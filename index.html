@@ -9,17 +9,43 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
         }
         header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: fixed;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .ruleta {
+            text-align: center;
+        }
+        .ruleta select {
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
             position: fixed;
+            bottom: 0;
             width: 100%;
-            top: 0;
-            left: 0;
         }
     </style>
 </head>
@@ -27,5 +53,38 @@
     <header>
         <h1>Plaza de los Juegos</h1>
     </header>
+    <nav>
+        <ul>
+            <li><a href="#seccion1">Presentación</a></li>
+            <li><a href="#seccion2">Ruleta de Movimientos</a></li>
+            <li><a href="#seccion3">Ruleta de Triángulos</a></li>
+        </ul>
+    </nav>
+    <section id="seccion1">
+        <!-- Contenido de la primera sección -->
+    </section>
+    <section id="seccion2" class="ruleta">
+        <h2>Ruleta de Movimientos</h2>
+        <select id="movimientos">
+            <option value="mano-derecha">Mano Derecha</option>
+            <option value="cabeza">Cabeza</option>
+            <option value="mano-izquierda">Mano Izquierda</option>
+            <option value="pie-d">Pie Derecho</option>
+            <option value="pie-i">Pie Izquierdo</option>
+        </select>
+    </section>
+    <section id="seccion3" class="ruleta">
+        <h2>Ruleta de Triángulos</h2>
+        <select id="triangulos">
+            <option value="triangulo-r">Triángulo Rojo</option>
+            <option value="triangulo-a">Triángulo Amarillo</option>
+            <option value="triangulo-ra">Triángulo Rosa</option>
+            <option value="triangulo-v">Triángulo Verde</option>
+            <option value="triangulo-az">Triángulo Azul</option>
+        </select>
+    </section>
+    <footer>
+        <p>&copy; 2024 Plaza de los Juegos</p>
+    </footer>
 </body>
 </html>
