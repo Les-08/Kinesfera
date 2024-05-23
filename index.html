@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plaza de los Juegos</title>
     <style>
+        /* Estilos CSS para la página */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -13,39 +14,43 @@
         header {
             background-color: #333;
             color: #fff;
-            padding: 10px 0;
+            padding: 20px;
             text-align: center;
         }
         nav {
-            background-color: #444;
-            padding: 10px 0;
+            background-color: #555;
+            padding: 10px;
             text-align: center;
         }
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
         }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
         .ruleta {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
         }
-        .ruleta select {
-            padding: 5px;
-            font-size: 16px;
-            margin-bottom: 10px;
+        .opcion {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 10px;
+            cursor: pointer;
         }
-        footer {
-            background-color: #333;
+        .opcion:hover {
+            background-color: #999;
             color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
         }
     </style>
 </head>
@@ -54,37 +59,44 @@
         <h1>Plaza de los Juegos</h1>
     </header>
     <nav>
-        <ul>
-            <li><a href="#seccion1">Presentación</a></li>
-            <li><a href="#seccion2">Ruleta de Movimientos</a></li>
-            <li><a href="#seccion3">Ruleta de Triángulos</a></li>
-        </ul>
+        <a href="#inicio">Inicio</a>
+        <a href="#ruleta1">Ruleta 1</a>
+        <a href="#ruleta2">Ruleta 2</a>
     </nav>
-    <section id="seccion1">
-        <!-- Contenido de la primera sección -->
-    </section>
-    <section id="seccion2" class="ruleta">
-        <h2>Ruleta de Movimientos</h2>
-        <select id="movimientos">
-            <option value="mano-derecha">Mano Derecha</option>
-            <option value="cabeza">Cabeza</option>
-            <option value="mano-izquierda">Mano Izquierda</option>
-            <option value="pie-d">Pie Derecho</option>
-            <option value="pie-i">Pie Izquierdo</option>
-        </select>
-    </section>
-    <section id="seccion3" class="ruleta">
-        <h2>Ruleta de Triángulos</h2>
-        <select id="triangulos">
-            <option value="triangulo-r">Triángulo Rojo</option>
-            <option value="triangulo-a">Triángulo Amarillo</option>
-            <option value="triangulo-ra">Triángulo Rosa</option>
-            <option value="triangulo-v">Triángulo Verde</option>
-            <option value="triangulo-az">Triángulo Azul</option>
-        </select>
-    </section>
-    <footer>
-        <p>&copy; 2024 Plaza de los Juegos</p>
-    </footer>
+    <div class="container">
+        <section id="inicio">
+            <!-- Contenido del primer apartado -->
+            <h2>¡Bienvenido!</h2>
+            <p>Este es el área de inicio. Aquí puedes agregar cualquier contenido que desees.</p>
+        </section>
+        <section id="ruleta1">
+            <!-- Contenido del segundo apartado con la ruleta 1 -->
+            <h2>Ruleta 1</h2>
+            <div class="ruleta" id="ruleta1">
+                <div class="opcion" onclick="seleccionarOpcion('Mano derecha')">Mano derecha</div>
+                <div class="opcion" onclick="seleccionarOpcion('Cabeza')">Cabeza</div>
+                <div class="opcion" onclick="seleccionarOpcion('Mano izquierda')">Mano izquierda</div>
+                <div class="opcion" onclick="seleccionarOpcion('Pie derecho')">Pie derecho</div>
+                <div class="opcion" onclick="seleccionarOpcion('Pie izquierdo')">Pie izquierdo</div>
+            </div>
+        </section>
+        <section id="ruleta2">
+            <!-- Contenido del tercer apartado con la ruleta 2 -->
+            <h2>Ruleta 2</h2>
+            <div class="ruleta" id="ruleta2">
+                <div class="opcion" onclick="seleccionarOpcion('Triángulo rojo')">Triángulo rojo</div>
+                <div class="opcion" onclick="seleccionarOpcion('Triángulo amarillo')">Triángulo amarillo</div>
+                <div class="opcion" onclick="seleccionarOpcion('Triángulo naranja')">Triángulo naranja</div>
+                <div class="opcion" onclick="seleccionarOpcion('Triángulo verde')">Triángulo verde</div>
+                <div class="opcion" onclick="seleccionarOpcion('Triángulo azul')">Triángulo azul</div>
+            </div>
+        </section>
+    </div>
+    <script>
+        // Función para manejar la selección de opciones en las ruletas
+        function seleccionarOpcion(opcion) {
+            alert("¡Seleccionaste: " + opcion + "!");
+        }
+    </script>
 </body>
 </html>
